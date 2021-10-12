@@ -1,11 +1,12 @@
 import styled from "styled-components";
-
-const Button = styled.button`
-  background: transparent;
-  border-radius: 3px;
-  border: 2px solid palevioletred;
-  color: palevioletred;
-  margin: 0 1em;
-  padding: 0.25em 1em;
+import defaultImg from "../images/room-1.jpeg";
+const StyledHero = styled.header`
+  min-height: 60vh;
+  background: url(${(props) => (props.img ? props.img : defaultImg)})
+    center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
-export default Button;
+
+export default StyledHero;
