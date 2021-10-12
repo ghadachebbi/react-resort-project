@@ -9,10 +9,17 @@ class RoomProvider extends Component {
     featuredRooms: [],
     loading: true,
   };
-
+  //getData
   componentDidMount() {
+    // this.getData
     let rooms = this.formatData(items);
-    console.log(rooms);
+    let featuredRooms = rooms.filter((room) => room.featured === true);
+    this.setState({
+      rooms,
+      featuredRooms,
+      sortedRooms: rooms,
+      loading: false, // currently because of local data
+    });
   }
 
   formatData(items) {
@@ -20,6 +27,8 @@ class RoomProvider extends Component {
       let id = item.sys.id;
       let images = item.fields.images.map((image) => image.fields.file.url);
       let room = { ...item.fields, images: images, id };
+
+      // console.log(featuredRooms);
       return room;
     });
     return tempItems;
@@ -27,7 +36,7 @@ class RoomProvider extends Component {
 
   render() {
     return (
-      <RoomContext.Provider value={{}}>
+      <RoomContext.Provider value={{ ...this.state }}>
         {this.props.children}
       </RoomContext.Provider>
     );
