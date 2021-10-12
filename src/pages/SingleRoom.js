@@ -41,14 +41,27 @@ export default class SingleRoom extends Component {
       pets,
       images,
     } = room;
+    const [mainImg, ...defaultImg] = images;
+    //check the rest of the images except the background image
+    //console.log(defaultImg);
+
     return (
-      <StyledHero img={images[0] || this.state.defaultBcg}>
-        <Banner title={`${name} room`}>
-          <Link to="/rooms" className="btn-primary">
-            back to rooms
-          </Link>
-        </Banner>
-      </StyledHero>
+      <>
+        <StyledHero img={mainImg || this.state.defaultBcg}>
+          <Banner title={`${name} room`}>
+            <Link to="/rooms" className="btn-primary">
+              back to rooms
+            </Link>
+          </Banner>
+        </StyledHero>
+        <section className="single-room">
+          <div className="single-room-images">
+            {defaultImg.map((item, index) => {
+              return <img key={index} src={item} alt={name} />;
+            })}
+          </div>
+        </section>
+      </>
     );
   }
 }
